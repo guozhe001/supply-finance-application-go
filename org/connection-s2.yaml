@@ -1,0 +1,237 @@
+---
+name: test-network-core
+version: 1.0.0
+client:
+  organization: GylS2Org
+  #  logging:
+  #    level: info
+  #    # Root of the MSP directories with keys and certs. The Membership Service Providers is component that aims to offer an abstraction of a membership operation architecture.
+  #  cryptoconfig:
+  #    path: "/Users/apple/code/open-source/blockchain/hyperledger/supply-finance/organizations"
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+#  # BCCSP config for the client. Used by GO SDK. It's the Blockchain Cryptographic Service Provider.
+#  # It offers the implementation of cryptographic standards and algorithms.
+#  BCCSP:
+#    security:
+#      enabled: true
+#      default:
+#        provider: "SW"
+#      hashAlgorithm: "SHA2"
+#      softVerify: true
+#      ephemeral: false
+#      level: 256
+#  tlsCerts:
+#    systemCertPool: false
+#    client:
+#      key:
+#        path:
+#      cert:
+#        path:
+
+# [Optional]. But most apps would have this section so that channel objects can be constructed based on the content below.
+# If one of your application is creating channels, you might not use this
+channels:
+  alljoinchannel:
+    #    orderers:
+    #      - orderer0.supply.com
+
+    # Network entity which maintains a ledger and runs chaincode containers in order to perform operations to the ledger. Peers are owned and maintained by members.
+    peers:
+      peer0.core.supply.com:
+        # [Optional]. will this peer be sent transaction proposals for endorsement? The peer must
+        # have the chaincode installed. The app can also use this property to decide which peers
+        # to send the chaincode install request. Default: true
+        endorsingPeer: true
+
+        # [Optional]. will this peer be sent query proposals? The peer must have the chaincode
+        # installed. The app can also use this property to decide which peers to send the
+        # chaincode install request. Default: true
+        chaincodeQuery: true
+
+        # [Optional]. will this peer be sent query proposals that do not require chaincodes, like
+        # queryBlock(), queryTransaction(), etc. Default: true
+        ledgerQuery: true
+
+        # [Optional]. will this peer be the target of the SDK's listener registration? All peers can
+        # produce events but the app typically only needs to connect to one to listen to events.
+        # Default: true
+        eventSource: true
+
+      peer0.f1.supply.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+      peer0.s1.supply.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+      peer0.s2.supply.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+
+      policies:
+        #[Optional] options for retrieving channel configuration blocks
+        queryChannelConfig:
+          #[Optional] min number of success responses (from targets/peers)
+          minResponses: 1
+          #[Optional] channel config will be retrieved for these number of random targets
+          maxTargets: 1
+          #[Optional] retry options for query config block
+          retryOpts:
+            #[Optional] number of retry attempts
+            attempts: 5
+            #[Optional] the back off interval for the first retry attempt
+            initialBackoff: 500ms
+            #[Optional] the maximum back off interval for any retry attempt
+            maxBackoff: 5s
+            #[Optional] he factor by which the initial back off period is exponentially incremented
+            backoffFactor: 2.0
+        #[Optional] options for retrieving discovery info
+        discovery:
+          #[Optional] discovery info will be retrieved for these number of random targets
+          maxTargets: 2
+          #[Optional] retry options for retrieving discovery info
+          retryOpts:
+            #[Optional] number of retry attempts
+            attempts: 4
+            #[Optional] the back off interval for the first retry attempt
+            initialBackoff: 500ms
+            #[Optional] the maximum back off interval for any retry attempt
+            maxBackoff: 5s
+            #[Optional] he factor by which the initial back off period is exponentially incremented
+            backoffFactor: 2.0
+        #[Optional] options for the event service
+        eventService:
+          # [Optional] resolverStrategy specifies the peer resolver strategy to use when connecting to a peer
+          # Possible values: [PreferOrg (default), MinBlockHeight, Balanced]
+          #
+          # PreferOrg:
+          #   Determines which peers are suitable based on block height lag threshold, although will prefer the peers in the
+          #   current org (as long as their block height is above a configured threshold). If none of the peers from the current org
+          #   are suitable then a peer from another org is chosen.
+          # MinBlockHeight:
+          #   Chooses the best peer according to a block height lag threshold. The maximum block height of all peers is
+          #   determined and the peers whose block heights are under the maximum height but above a provided "lag" threshold are load
+          #   balanced. The other peers are not considered.
+          # Balanced:
+          #   Chooses peers using the configured balancer.
+          resolverStrategy: PreferOrg
+          # [Optional] balancer is the balancer to use when choosing a peer to connect to
+          # Possible values: [Random (default), RoundRobin]
+          balancer: Random
+          # [Optional] blockHeightLagThreshold sets the block height lag threshold. This value is used for choosing a peer
+          # to connect to. If a peer is lagging behind the most up-to-date peer by more than the given number of
+          # blocks then it will be excluded from selection.
+          # If set to 0 then only the most up-to-date peers are considered.
+          # If set to -1 then all peers (regardless of block height) are considered for selection.
+          # Default: 5
+          blockHeightLagThreshold: 5
+          # [Optional] reconnectBlockHeightLagThreshold - if >0 then the event client will disconnect from the peer if the peer's
+          # block height falls behind the specified number of blocks and will reconnect to a better performing peer.
+          # If set to 0 then this feature is disabled.
+          # Default: 10
+          # NOTES:
+          #   - peerMonitorPeriod must be >0 to enable this feature
+          #   - Setting this value too low may cause the event client to disconnect/reconnect too frequently, thereby
+          #     affecting performance.
+          reconnectBlockHeightLagThreshold: 10
+          # [Optional] peerMonitorPeriod is the period in which the connected peer is monitored to see if
+          # the event client should disconnect from it and reconnect to another peer.
+          # Default: 0 (disabled)
+          peerMonitorPeriod: 5s
+
+organizations:
+  GylCoreOrg:
+    mspid: GylCoreOrg1MSP
+    cryptoPath: "../supply-finance/organizations/peerOrganizations/core.supply.com/users/Admin@core.supply.com/msp/"
+    peers:
+      - peer0.core.supply.com
+  GylFOrg:
+    mspid: GylFOrg1MSP
+    cryptoPath: "../supply-finance/organizations/peerOrganizations/f1.supply.com/users/Admin@f1.supply.com/msp/"
+    peers:
+      - peer0.f1.supply.com
+  GylS1Org:
+    mspid: GylSOrg1MSP
+    cryptoPath: "../supply-finance/organizations/peerOrganizations/s1.supply.com/users/Admin@s1.supply.com/msp/"
+    peers:
+      - peer0.s1.supply.com
+  GylS2Org:
+    mspid: GylSOrg2MSP
+    cryptoPath: "../supply-finance/organizations/peerOrganizations/s2.supply.com/users/Admin@s2.supply.com/msp/"
+    peers:
+      - peer0.s2.supply.com
+
+
+orderers:
+  orderer0.supply.com:
+    url: grpcs://localhost:8050
+    grpcOptions:
+      ssl-target-name-override: orderer.supply.com
+      grpc-max-send-message-length: 15
+    tlsCACerts:
+      path: "../supply-finance/organizations/ordererOrganizations/supply.com/tlsca/tlsca.supply.com-cert.pem"
+
+
+peers:
+  peer0.core.supply.com:
+    url: grpcs://localhost:8051
+    tlsCACerts:
+      path: "../supply-finance/organizations/peerOrganizations/core.supply.com/peers/peer0.core.supply.com/tls/ca.crt"
+    grpcOptions:
+      ssl-target-name-override: peer0.core.supply.com
+      hostnameOverride: peer0.core.supply.com
+  peer0.f1.supply.com:
+    url: grpcs://localhost:8053
+    tlsCACerts:
+      path: "../supply-finance/organizations/peerOrganizations/f1.supply.com/peers/peer0.f1.supply.com/tls/ca.crt"
+    grpcOptions:
+      ssl-target-name-override: peer0.f1.supply.com
+      hostnameOverride: peer0.f1.supply.com
+  peer0.s1.supply.com:
+    url: grpcs://localhost:8055
+    tlsCACerts:
+      path: "../supply-finance/organizations/peerOrganizations/s1.supply.com/peers/peer0.s1.supply.com/tls/ca.crt"
+    grpcOptions:
+      ssl-target-name-override: peer0.s1.supply.com
+      hostnameOverride: peer0.s1.supply.com
+  peer0.s2.supply.com:
+    url: grpcs://localhost:8151
+    tlsCACerts:
+      path: "../supply-finance/organizations/peerOrganizations/s2.supply.com/peers/peer0.s2.supply.com/tls/ca.crt"
+    grpcOptions:
+      ssl-target-name-override: peer0.s2.supply.com
+      hostnameOverride: peer0.s2.supply.com
+
+entityMatchers:
+  peer:
+    - pattern: (\w*)peer0.core.supply.com(\w*)
+      #      urlSubstitutionExp: 10.120.128.59:9051
+      #      eventUrlSubstitutionExp: 10.120.128.59:9053
+      sslTargetOverrideUrlSubstitutionExp: peer0.core.supply.com
+      mappedHost: peer0.core.supply.com
+    - pattern: (\w*)peer0.f1.supply.com(\w*)
+      #      urlSubstitutionExp: 10.120.128.140:9061
+      #      eventUrlSubstitutionExp: 10.120.128.140:9063
+      sslTargetOverrideUrlSubstitutionExp: peer0.f1.supply.com
+      mappedHost: peer0.f1.supply.com
+    - pattern: (\w*)peer0.s1.supply.com(\w*)
+      #      urlSubstitutionExp: 10.120.128.214:9071
+      #      eventUrlSubstitutionExp: 10.120.128.214:9073
+      sslTargetOverrideUrlSubstitutionExp: peer0.s1.supply.com
+      mappedHost: peer0.s1.supply.com
+    - pattern: (\w*)peer0.s2.supply.com(\w*)
+      #      urlSubstitutionExp: 10.120.128.214:9071
+      #      eventUrlSubstitutionExp: 10.120.128.214:9073
+      sslTargetOverrideUrlSubstitutionExp: peer0.s2.supply.com
+      mappedHost: peer0.s2.supply.com
+
+  orderer:
+    - pattern: (\w*)orderer0.supply.com(\w*)
+      #      urlSubstitutionExp: 10.120.128.59:7050
+      sslTargetOverrideUrlSubstitutionExp: orderer0.supply.com
+      mappedHost: orderer0.supply.com
