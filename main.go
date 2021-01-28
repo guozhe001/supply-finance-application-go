@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/base64"
-	"github.com/guozhe001/supply-finance/application-go/org"
+	"github.com/guozhe001/supply-finance-application-go/org"
 	"github.com/hyperledger/fabric-sdk-go/pkg/gateway"
 	"log"
 	"os"

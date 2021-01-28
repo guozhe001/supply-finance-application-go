@@ -1,6 +1,6 @@
 package org
 
-import "github.com/guozhe001/supply-finance/application-go/constant"
+import "github.com/guozhe001/supply-finance-application-go/constant"
 
 type ConfigOrg2 struct {
 }
