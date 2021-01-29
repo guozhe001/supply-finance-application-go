@@ -58,6 +58,7 @@ func (a Application) ConnectGateway(wallet *gateway.Wallet) (*gateway.Gateway, e
 // 3.Access PaperNet network
 func (a Application) GetNetWork(gw *gateway.Gateway) *gateway.Network {
 	network, err := gw.GetNetwork(a.conf.GetChannelName())
+
 	if err != nil {
 		log.Fatal(err)
 	}

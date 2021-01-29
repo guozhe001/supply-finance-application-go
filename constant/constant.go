@@ -2,6 +2,7 @@ package constant
 
 const (
 	UserName = "appUser"
+	Admin    = "Admin"
 
 	MspIdCore = "GylCoreOrg1MSP"
 	MspIdF    = "GylFOrg1MSP"

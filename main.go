@@ -9,6 +9,11 @@ import (
 )
 
 func main() {
+	//practiceGateWay()
+	AccessChannel()
+}
+
+func practiceGateWay() {
 	log.Println("============ application-golang starts ============")
 	setenv()
 	conf := []org.ConfInterface{

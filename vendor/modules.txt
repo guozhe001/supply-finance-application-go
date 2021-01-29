@@ -111,6 +111,11 @@ github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/comm
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/common/policies
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/common/policydsl
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/common/util
+github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/core/chaincode/persistence
+github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/core/chaincode/platforms/golang
+github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/core/chaincode/platforms/java
+github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/core/chaincode/platforms/node
+github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/core/chaincode/platforms/util
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/core/common/ccprovider
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/core/middleware
@@ -121,9 +126,11 @@ github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/goss
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/msp
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/msp/cache
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/protoutil
+github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkinternal/ccmetadata
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkinternal/configtxgen/encoder
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkinternal/configtxgen/genesisconfig
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkinternal/configtxlator/update
+github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkinternal/peer/packaging
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkinternal/pkg/comm
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkinternal/pkg/identity
 github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkinternal/pkg/txflags
@@ -147,6 +154,7 @@ github.com/hyperledger/fabric-sdk-go/pkg/client/common/selection/sorter/balanced
 github.com/hyperledger/fabric-sdk-go/pkg/client/common/selection/sorter/blockheightsorter
 github.com/hyperledger/fabric-sdk-go/pkg/client/common/verifier
 github.com/hyperledger/fabric-sdk-go/pkg/client/event
+github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt
 github.com/hyperledger/fabric-sdk-go/pkg/common/errors/multi
 github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry
 github.com/hyperledger/fabric-sdk-go/pkg/common/errors/status
@@ -172,6 +180,7 @@ github.com/hyperledger/fabric-sdk-go/pkg/core/logging/metadata
 github.com/hyperledger/fabric-sdk-go/pkg/core/logging/modlog
 github.com/hyperledger/fabric-sdk-go/pkg/core/mocks
 github.com/hyperledger/fabric-sdk-go/pkg/fab
+github.com/hyperledger/fabric-sdk-go/pkg/fab/ccpackager/lifecycle
 github.com/hyperledger/fabric-sdk-go/pkg/fab/channel
 github.com/hyperledger/fabric-sdk-go/pkg/fab/channel/membership
 github.com/hyperledger/fabric-sdk-go/pkg/fab/chconfig
@@ -235,6 +244,7 @@ github.com/mitchellh/mapstructure
 # github.com/pelletier/go-toml v1.8.0
 github.com/pelletier/go-toml
 # github.com/pkg/errors v0.8.1
+## explicit
 github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
