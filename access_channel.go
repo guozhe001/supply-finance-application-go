@@ -5,6 +5,7 @@ import (
 	"github.com/guozhe001/supply-finance-application-go/org"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel/invoke"
+	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/context"
 	"github.com/hyperledger/fabric-sdk-go/pkg/core/config"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 	"log"
@@ -65,16 +66,25 @@ func Query(cc *channel.Client, orgConfig org.ConfigCore) {
 
 // GetChannelClient 获取channel.Client
 func GetChannelClient(orgConfig org.ConfInterface) *channel.Client {
-	sdk, err := fabsdk.New(config.FromFile(filepath.Join(constant.OrgDirMain, orgConfig.GetConnectionFileName())))
-	if err != nil {
-		log.Panicf("failed to create fabric sdk: %s", err)
-	}
-	//rcp := sdk.Context(fabsdk.WithUser("Admin"), fabsdk.WithOrg("GylCoreOrg1MSP"))
-	//rc, err := resmgmt.New(rcp)
-	ccp := sdk.ChannelContext(orgConfig.GetChannelName(), fabsdk.WithUser(constant.Admin))
-	cc, err := channel.New(ccp)
+	cc, err := channel.New(GetChannelContext(orgConfig))
 	if err != nil {
 		log.Panicf("failed to create channel client: %s", err)
 	}
 	return cc
+}
+
+// 获取通道上下文
+func GetChannelContext(orgConfig org.ConfInterface) context.ChannelProvider {
+	//rcp := sdk.Context(fabsdk.WithUser("Admin"), fabsdk.WithOrg("GylCoreOrg1MSP"))
+	//rc, err := resmgmt.New(rcp)
+	return GetSdk(orgConfig).ChannelContext(orgConfig.GetChannelName(), fabsdk.WithUser(constant.Admin))
+}
+
+// 获取SDK实例
+func GetSdk(orgConfig org.ConfInterface) *fabsdk.FabricSDK {
+	sdk, err := fabsdk.New(config.FromFile(filepath.Join(constant.OrgDirMain, orgConfig.GetConnectionFileName())))
+	if err != nil {
+		log.Panicf("failed to create fabric sdk: %s", err)
+	}
+	return sdk
 }

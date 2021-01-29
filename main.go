@@ -10,7 +10,9 @@ import (
 
 func main() {
 	//practiceGateWay()
-	AccessChannel()
+	//AccessChannel()
+	//eventPractice()
+	LedgerPractice()
 }
 
 func practiceGateWay() {
