@@ -14,7 +14,7 @@ import (
 	"runtime"
 )
 
-func AccessChannel() {
+func channelPractice() {
 	var orgConfig = org.ConfigCore{}
 	cc := GetChannelClient(orgConfig)
 	invokeAndPrintLog(Query, cc, orgConfig)

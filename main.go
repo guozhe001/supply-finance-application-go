@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/base64"
 	"github.com/guozhe001/supply-finance-application-go/org"
 	"github.com/hyperledger/fabric-sdk-go/pkg/gateway"
 	"log"
@@ -9,10 +8,10 @@ import (
 )
 
 func main() {
-	//practiceGateWay()
-	//AccessChannel()
+	practiceGateWay()
+	//channelPractice()
 	//eventPractice()
-	LedgerPractice()
+	//ledgerPractice()
 }
 
 func practiceGateWay() {
@@ -33,24 +32,25 @@ var peers = []string{"peer0.core.supply.com:8051", "peer0.f1.supply.com:8053", "
 
 func submitTransaction(app application, contract *gateway.Contract) {
 	// 5.Submit the transaction to the network
-	//result, err := app.SubmitTransaction(contract, "issue", "MagnetoCorp", "00002", "2020-05-31", "2020-11-30", "5000000")
+	//result, err := app.SubmitTransaction(contract, peers,nil,"InitLedger", "MagnetoCorp", "application003", "2020-05-31", "2020-11-30", "5000000")
+	result, err := app.SubmitTransaction(contract, peers, nil, "InitLedger")
 	// 使用transient数据
 	//transient := make(map[string][]byte)
-	//privateAsset := "{\"objectType\":\"asset_properties\",\"assetID\":\"application001\",\"issuer\":\"GylCoreOrg1MSP\",\"amount\":1000,\"createDate\":\"2020-01-11T06:57:06.963617Z\",\"endDate\":\"2021-07-11T06:57:06.963617Z\",\"salt\":\"224cba6c547aecc76ab6acfac41d12dfd96e7165\"}"
+	//privateAsset := "{\"objectType\":\"asset_properties\",\"assetID\":\"application004\",\"issuer\":\"GylCoreOrg1MSP\",\"amount\":1000,\"createDate\":\"2020-01-11T06:57:06.963617Z\",\"endDate\":\"2021-07-11T06:57:06.963617Z\",\"salt\":\"224cba6c547aecc76ab6acfac41d12dfd96e7165\"}"
 	//log.Println(privateAsset)
 	//base64Asset := base64.StdEncoding.EncodeToString([]byte(privateAsset))
 	//log.Println(base64Asset)
 	//transient["asset_properties"] = []byte(base64Asset)
-	//result, err := app.SubmitTransaction(contract, peers[0:1], transient, "CreateAsset", "application001", "hello application")
+	//result, err := app.SubmitTransaction(contract, peers[0:1], transient, "CreateAsset", "application004", "hello application")
 	// 查询数据
-	result, err := app.SubmitTransaction(contract, []string{}, nil, "ReadAsset", "application001")
+	//result, err := app.SubmitTransaction(contract, []string{}, nil, "ReadAsset", "application003")
 	// 查询私有数据库
 	//result, err := app.SubmitTransaction(contract, []string{}, nil, "GetAssetPrivateProperties", "application001")
 	if err != nil {
 		panic(err)
 	}
-	decodeString, err := base64.StdEncoding.DecodeString(string(result))
-	log.Println(string(decodeString))
+	//decodeString, err := base64.StdEncoding.DecodeString(string(result))
+	//log.Println(string(decodeString))
 	// 6.Process the response
 	app.ProcessResponse(result)
 }

@@ -24,10 +24,5 @@ const (
 
 	WalletPath = "wallet"
 
-	OrgDirCore = "core"
-	OrgDirF    = "f"
-	OrgDirS1   = "s1"
-	OrgDirS2   = "s2"
-
 	OrgDirMain = "org"
 )

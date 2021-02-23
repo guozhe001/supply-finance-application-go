@@ -22,7 +22,8 @@ func (a Application) GetWallet() (*gateway.Wallet, error) {
 	///msp/
 	walletPath := filepath.Join(
 		constant.WalletPath,
-		a.conf.GetMspId(),
+		//a.conf.GetMspId(),
+		"test",
 	)
 	wallet, err := gateway.NewFileSystemWallet(walletPath)
 	if err != nil {
@@ -86,8 +87,8 @@ func (a Application) SubmitTransaction(contract *gateway.Contract, endorsingPeer
 		fmt.Printf("Failed to create transaction: %s\n", err)
 		//return nil, err
 	}
-
 	return txn.Submit(args...)
+	//return txn.Evaluate(args...)
 }
 
 // 6.Process the response

@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-func LedgerPractice() {
+func ledgerPractice() {
 	core := org.ConfigCore{}
 	client, err := ledger.New(GetChannelContext(core))
 	if err != nil {

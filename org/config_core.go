@@ -14,19 +14,34 @@ func (c ConfigCore) GetUserName() string {
 }
 
 func (c ConfigCore) GetCredPathSlice() []string {
-	return []string{"/Users",
+	//return []string{"/Users",
+	//	"apple",
+	//	"code",
+	//	"open-source",
+	//	"blockchain",
+	//	"hyperledger",
+	//	"supply-finance",
+	//	"organizations",
+	//	"peerOrganizations",
+	//	"core.supply.com",
+	//	"users",
+	//	//"Admin@core.supply.com",
+	//	"User1@core.supply.com",
+	//	"msp"}
+	return []string{
+		"/Users",
 		"apple",
 		"code",
 		"open-source",
 		"blockchain",
 		"hyperledger",
-		"supply-finance",
+		"fabric-samples",
+		"test-network",
 		"organizations",
 		"peerOrganizations",
-		"core.supply.com",
+		"org1.example.com",
 		"users",
-		//"Admin@core.supply.com",
-		"User1@core.supply.com",
+		"User1@org1.example.com",
 		"msp"}
 }
 
@@ -47,5 +62,5 @@ func (c ConfigCore) GetChaincodeId() string {
 }
 
 func (c ConfigCore) GetContractName() string {
-	return constant.ContractName
+	return constant.ContractNamePractice
 }
