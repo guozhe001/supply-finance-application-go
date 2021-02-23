@@ -22,8 +22,9 @@ func practiceGateWay() {
 		org.ConfigF{},
 		org.ConfigS1{},
 		org.ConfigS2{},
+		org.ConfigSupply{},
 	}
-	submitTransaction(getAppAndContract(conf[0]))
+	submitTransaction(getAppAndContract(conf[4]))
 	log.Println("============ application-golang ends ============")
 }
 

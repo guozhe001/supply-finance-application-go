@@ -17,10 +17,11 @@ const (
 	ContractNamePractice = "Practice_SmartContract"
 
 	// 链接文件名称
-	ConnectionFileNameCore = "connection-core.yaml"
-	ConnectionFileNameF    = "connection-f.yaml"
-	ConnectionFileNameS1   = "connection-s1.yaml"
-	ConnectionFileNameS2   = "connection-s2.yaml"
+	ConnectionFileNameCore   = "connection-core.yaml"
+	ConnectionFileNameF      = "connection-f.yaml"
+	ConnectionFileNameS1     = "connection-s1.yaml"
+	ConnectionFileNameS2     = "connection-s2.yaml"
+	ConnectionFileNameSupply = "connection-supply.yaml"
 
 	WalletPath = "wallet"
 
